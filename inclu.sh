@@ -1,9 +1,9 @@
 #!/bin/bash
 
 usage() {
-    printf "Inclush\n"
+    printf "inclu.sh\n"
     printf "    Description: Dynamically source multiple scripts in the current shell\n"
-    printf "    Usage: inclush [--env] --source=\"/path/to/file1, /path/to/file2\"\n"
+    printf "    Usage: inclu.sh [--env] --source=\"/path/to/file1, /path/to/file2\"\n"
     printf "    Parameters:\n"
     printf "        \x2D\x2Dhelp       Displays this message"
     printf "        \x2D\x2Denv        Source files in separate environment"
