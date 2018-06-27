@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import re
+import pyperclip
+
+output = "" # Initialize output variable to allow appending
+
+if len(sys.argv) == 1: # If no arguments provided...
+    sys.exit("UniChar: Error: No Unicode Character Numbers Specified") # exit script with error message
+
+if os.name == "nt": # If OS is Windows...
+    if os.popen("CHCP").read()[-6:-1] != "65001": # If codepage isn't UTF-8...
+        os.system("CHCP 65001") # Set codepage to UTF-8
+elif os.name == "posix": # If OS is UN*X...
+    if os.getenv("LANG") != "en_US.UTF-8": # If terminal encoding isn't UTF-8...
+        os.system("LANG=en_US.UTF-8") # Set terminal encoding to UTF-8
+
+for index, char in enumerate(sys.argv[1:], start=1): # For each input argument after argument vector index 1...
+    if len(char) > 5 or not re.match("([0-9|A-F]{4,5})", char): # If input argument over five in length or contains a non-hexadecimal number...
+        print("UniChar: Error At Argument: \b", index, "\b, \"{}\"".format(char), "\b, Invalid Unicode Character Number") # Print error message and exit
+        exit()
+    output += chr(int(char, base=16)) # Append expanded input argument to aforementioned output variable
+
+pyperclip.copy(output) # Pipe output variable to clipboard
+print("Copied to clipboard")

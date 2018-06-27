@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -o posix
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+setxkbmap -model pc105 -layout us -variant intl
+sleep 0.5s
+xmodmap ~/.Xmodmap
