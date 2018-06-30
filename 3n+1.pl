@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+use 5.26;
 use Term::ANSIColor;
 
 my $n = $ARGV[0];
@@ -8,7 +9,7 @@ exit 0 if (not(defined $n));
 my $origin = $n;
 my @seq;
 my $count;
-until ($n == "1") {
+until ($n == 1) {
     if (($n % 2) == 0) {
         $n=$n/2;
     } else {
