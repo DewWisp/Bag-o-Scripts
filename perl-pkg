@@ -1,0 +1,31 @@
+#!/bin/bash
+case $1 in
+    install)
+        sudo cpan "${@:2}"
+        ;;
+    uninstall)
+        sudo cpanm --uninstall "${@:2}"
+        ;;
+    reinstall)
+        sudo cpanm --reinstall "${@:2}"
+        ;;
+    list)
+        cpan -l 2>/dev/null | perl -ne 's/(?<version>[\d._]+)/v$+{version}/g and print $_' | sort | column -t -N Module,Version | $PAGER
+        ;;
+    -v|--version)
+        printf "CPAN v%s\n" "$(cpan -v 2>&1 | grep -Po '(?<=version )(\d|\.)+$')"
+        ;;
+    -h|--help|*)
+        echo 'perl-pkg (CPAN Wrapper)'
+        echo 'Description: Comprehensive Perl Archive Network wrapper.'
+        echo 'Usage: perl-pkg [OPTION] [COMMAND] CPAN::Module'
+        echo 'Options:'
+        echo '    -h, --help         Prints this message.'
+        echo '    -v, --version      Displays CPAN version.'
+        echo 'Commands:'
+        echo '    install      Install a Perl module.'
+        echo '    uninstall    Uninstall a Perl module.'
+        echo '    reinstall    Re-Install a Perl module.'
+        echo '    list         List installed Perl modules.'
+        ;;
+esac

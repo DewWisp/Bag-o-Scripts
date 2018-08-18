@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -o posix
 
-if [[ -e "$HOME/.emacs.d/elpa" ]]; then
-    pushd "$HOME/.emacs.d/elpa" >>/dev/null
+if [[ -e "$HOME/.emacs.d/packages" ]]; then
+    pushd "$HOME/.emacs.d/packages" >>/dev/null
 else
     echo -e "\e[33mError\e[0m: \e[31memacs elpa package directory not found...\e[0m\n" && exit 1
 fi
